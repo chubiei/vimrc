@@ -2,11 +2,12 @@
 call pathogen#infect()
 call pathogen#helptags()
 
+syntax on
+set hlsearch
+
 " enable file type plugins
 filetype on
 filetype plugin on
-
-syntax on
 
 " swp files location
 set directory=/tmp
