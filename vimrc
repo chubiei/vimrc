@@ -25,12 +25,11 @@ set fileencodings=utf-8,usc-bom,big5,gb2312,latin1
 
 
 " ----------------------------------------------------------
-" PLUGIN OPTION
+"  PLUGIN OPTION
 " ----------------------------------------------------------
 " AutoComplPop
-" - auto OmniCppComplete
-let g:acp_behaviorUserDefinedFunction = 'omni#cpp#complete#Main'
-let g:acp_behaviorUserDefinedMeets = 'acp#meetsForKeyword'
+" - auto OmniCppComplete (always use CTRL-X CTRL-O)
+let g:acp_behavior = {'command': "\<C-x>\<C-o>", 'meets': 'acp#meetsForKeyword', 'repeat': 0}
 
 " OmniCppComplete
 " - options
