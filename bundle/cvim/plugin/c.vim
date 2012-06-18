@@ -4203,7 +4203,7 @@ if has("autocmd")
 				"-------------------------------------------------------------------------------
 				" template styles are the default settings
 				"-------------------------------------------------------------------------------
-				if (g:cvim_opt_insert_header != 0)
+				if (s:cvim_opt_insert_header != 0)
 					autocmd BufNewFile  * if &filetype =~ '^\(c\|cpp\)$' && expand("%:e") !~ 'ii\?' |
 								\     call C_InsertTemplateWrapper() | endif
 				endif

@@ -2,12 +2,22 @@
 call pathogen#infect()
 call pathogen#helptags()
 
-syntax on
-set hlsearch
+set nocompatible
 
 " enable file type plugins
 filetype on
 filetype plugin on
+
+" colors on work station
+if ($TERM == "vt100")
+	set t_Co=8
+	set t_AB=[48;5;%dm
+	set t_AF=[38;5;%dm
+endif
+
+" syntax color on
+syntax on
+set hlsearch
 
 " swp files location
 set directory=/tmp
