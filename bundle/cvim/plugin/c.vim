@@ -63,6 +63,8 @@ let s:C_LocalTemplateFile		= ''
 let s:C_LocalTemplateDir		= ''
 let s:C_FilenameEscChar 		= ''
 
+let s:cvim_opt_insert_header = 1
+
 if	s:MSWIN
   " ==========  MS Windows  ======================================================
 	"
@@ -211,6 +213,7 @@ call C_CheckGlobal('C_TemplateOverriddenMsg')
 call C_CheckGlobal('C_TypeOfH              ')
 call C_CheckGlobal('C_VimCompilerName      ')
 call C_CheckGlobal('C_XtermDefaults        ')
+call C_CheckGlobal('cvim_opt_insert_header')
 
 if exists('g:C_GlobalTemplateFile') && !empty(g:C_GlobalTemplateFile)
 	let s:C_GlobalTemplateDir	= fnamemodify( s:C_GlobalTemplateFile, ":h" )
@@ -4200,8 +4203,10 @@ if has("autocmd")
 				"-------------------------------------------------------------------------------
 				" template styles are the default settings
 				"-------------------------------------------------------------------------------
-				autocmd BufNewFile  * if &filetype =~ '^\(c\|cpp\)$' && expand("%:e") !~ 'ii\?' |
-							\     call C_InsertTemplateWrapper() | endif
+				if (g:cvim_opt_insert_header != 0)
+					autocmd BufNewFile  * if &filetype =~ '^\(c\|cpp\)$' && expand("%:e") !~ 'ii\?' |
+								\     call C_InsertTemplateWrapper() | endif
+				endif
 				"
 			else
 				"-------------------------------------------------------------------------------

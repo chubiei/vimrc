@@ -39,4 +39,8 @@ let OmniCpp_SelectFirstItem = 2
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" cvim
+" - disable cvim header template
+let g:cvim_opt_insert_header = 0
+
 
