@@ -1,3 +1,6 @@
+# using name space std
+snippet using
+	using namespace ${1:std};
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
@@ -19,12 +22,12 @@ snippet ns
 		${2}
 	} /* $1 */
 # Class
-snippet cl
+snippet class
 	class ${1:`Filename('$1_t', 'name')`} {
-	public:
-		$1 (${2:arguments});
-		virtual ~$1 ();
+		public:
+			$1 (${2:arguments});
+			virtual ~$1 ();
 	
-	private:
-		${3:/* data */}
+		private:
+			${3:/* data */}
 	};

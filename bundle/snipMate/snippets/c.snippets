@@ -29,8 +29,8 @@ snippet #if
 # Header Include-Guard
 # (the randomizer code is taken directly from TextMate; it could probably be
 # cleaner, I don't know how to do it in vim script)
-snippet once
-	#ifndef ${1:`toupper(Filename('', 'UNTITLED').'_'.system("/usr/bin/ruby -e 'print (rand * 2821109907455).round.to_s(36)'"))`}
+snippet ifndef
+	#ifndef ${1: /* define */}
 
 	#define $1
 
@@ -64,11 +64,6 @@ snippet for
 	for (${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
 		${4:/* code */}
 	}
-# Custom For Loop
-snippet forr
-	for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
-		${5:/* code */}
-	}
 # Function
 snippet function
 	${1:void} ${2:function_name}(${3})
@@ -79,10 +74,10 @@ snippet function
 snippet fund
 	${1:void} ${2:function_name}(${3});${4}
 # Typedef
-snippet td
-	typedef ${1:int} ${2:MyCustomType};${3}
+snippet typedef
+	typedef ${1:int} ${2:MyCustomType};${4}
 # Struct
-snippet st
+snippet struct
 	struct ${1:`Filename('$1_t', 'name')`} {
 		${2:/* data */}
 	}${3: /* optional variable list */};${4}
@@ -91,6 +86,11 @@ snippet tds
 	typedef struct ${2:_$1 }{
 		${3:/* data */}
 	} ${1:`Filename('$1_t', 'name')`};
+#enum 
+snippet enum
+	enum {
+		${1:/* enumerate */}
+	} ${2: /* name */};
 # Typdef enum
 snippet tde
 	typedef enum {

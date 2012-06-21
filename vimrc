@@ -3,6 +3,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible
+set autoindent
 
 " enable file type plugins
 filetype on

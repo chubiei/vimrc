@@ -19,8 +19,8 @@ let b:did_C_ftplugin = 1
 "-------------------------------------------------------------------------------
 " ADDITIONAL MAPPING : complete a classical C comment: '/*' => '/* | */'
 "-------------------------------------------------------------------------------
-inoremap  <buffer>  /*       /*<Space><Space>*/<Left><Left><Left>
-vnoremap  <buffer>  /*      s/*<Space><Space>*/<Left><Left><Left><Esc>p
+"inoremap  <buffer>  /*       /*<Space><Space>*/<Left><Left><Left>
+"vnoremap  <buffer>  /*      s/*<Space><Space>*/<Left><Left><Left><Esc>p
 "
 "-------------------------------------------------------------------------------
 " additional mapping : complete a classical C multi-line comment: 
@@ -28,11 +28,11 @@ vnoremap  <buffer>  /*      s/*<Space><Space>*/<Left><Left><Left><Esc>p
 "                                    * |
 "                                    */
 "-------------------------------------------------------------------------------
-inoremap  <buffer>  /*<CR>  /*<CR><CR>/<Esc>kA<Space>
+"inoremap  <buffer>  /*<CR>  /*<CR><CR>/<Esc>kA<Space>
 "
 "-------------------------------------------------------------------------------
 " additional mapping : {<CR> always opens a block
 "-------------------------------------------------------------------------------
-inoremap  <buffer>  {<CR>    {<CR>}<Esc>O
-vnoremap  <buffer>  {<CR>   S{<CR>}<Esc>Pk=iB
+"inoremap  <buffer>  {<CR>    {<CR>}<Esc>O
+"vnoremap  <buffer>  {<CR>   S{<CR>}<Esc>Pk=iB
 "
