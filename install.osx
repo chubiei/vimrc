@@ -1,0 +1,141 @@
+#!/bin/sh
+
+BUNDLE_DIR=bundle
+GIT=git
+CURL=curl
+
+# vim related variables
+MAC_VIM_APP_PATH="/Applications/MacVim.app"
+LOCAL_VIM_LINK_PATH="/usr/local/bin/vim"
+
+# cmake related variables
+CMAKE_APP_PATH="/Applications/CMake.app"
+LOCAL_CMAKE_LINK_PATH="/usr/local/bin/cmake"
+
+install_mac_vim()
+{
+	local download=mac-vim.tbz
+
+	if [ -d $MAC_VIM_APP_PATH ]; then
+		echo "found MacVim.app, install is completed"
+		return
+	fi
+
+	if [ -L $LOCAL_VIM_LINK_PATH ]; then
+		echo "vim link ($LOCAL_VIM_LINK_PATH) exists, please backup this link first"
+		exit -1
+	fi
+
+	# NOTE: the latest release now is snapshot 77
+	echo "downloading MacVim (snapshot 77) ..."
+	$CURL -L -o $download https://github.com/macvim-dev/macvim/releases/download/snapshot-77/MacVim-snapshot-77.tbz
+	tar xjvf $download
+
+	echo "installing MacVim ..."
+	sudo mkdir -p /usr/local/bin
+
+	# copy MacVim.app into application folder and link mvim
+	sudo cp -rf MacVim-snapshot-77/MacVim.app $MAC_VIM_APP_PATH
+	sudo cp -rf MacVim-snapshot-77/mvim       $MAC_VIM_APP_PATH/Contents/MacOS/mvim
+	sudo ln -sf "$MAC_VIM_APP_PATH/Contents/MacOS/mvim" $LOCAL_VIM_LINK_PATH
+
+	# clean up
+	rm -rf MacVim-snapshot-77
+	rm -rf $download
+}
+
+remove_mac_vim()
+{
+	sudo rm -rf $MAC_VIM_APP_PATH
+	sudo rm $LOCAL_VIM_LINK_PATH
+}
+
+install_cmake()
+{
+	local download="cmake.tar.gz"
+
+	if [ -d $CMAKE_APP_PATH ]; then
+		echo "found CMake.app, install is completed"
+		return
+	fi
+
+	if [ -L $LOCAL_CMAKE_LINK_PATH ]; then
+		echo "cmake link ($LOCAL_CMAKE_LINK_PATH) exists, please backup this link first"
+		exit -1
+	fi
+
+	# NOTE: the latest release now is snapshot 77
+	echo "downloading CMake 3.3.2 ..."
+	$CURL -L -o $download https://cmake.org/files/v3.3/cmake-3.3.2-Darwin-x86_64.tar.gz
+	tar xvf $download
+
+	echo "installing CMake ..."
+	sudo mkdir -p /usr/local/bin
+
+	# copy CMake.app to application folder
+	sudo cp -rf cmake-3.3.2-Darwin-x86_64/CMake.app $CMAKE_APP_PATH
+	sudo ln -sf $CMAKE_APP_PATH/Contents/bin/cmake  $LOCAL_CMAKE_LINK_PATH
+
+	# clean up
+	rm -rf cmake-3.3.2-Darwin-x86_64
+	rm -rf $download
+}
+
+remove_cmake()
+{
+	sudo rm -rf $CMAKE_APP_PATH
+	sudo rm -rf $LOCAL_CMAKE_LINK_PATH
+}
+
+clone_github_project()
+{
+	local project=$1
+	local dest="$BUNDLE_DIR/$project"
+
+	if [ -d $dest ]; then
+		echo "$dest exists, skipping ..."
+		return
+	fi
+
+	mkdir -p $BUNDLE_DIR
+	$GIT clone https://github.com/chubiei/$project $dest
+}
+
+build_ycm()
+{
+	local old_dir=`pwd`
+	local ycm_dir="$BUNDLE_DIR/YouCompleteMe"
+
+	if [ ! -d $ycm_dir ]; then
+		echo "YouCompleteMe does not exist, abort"
+		exit -1
+	fi
+
+	echo "building YouCompleteMe ..."
+	cd $ycm_dir
+
+	echo "initializing ycm components ..."
+	$GIT submodule update --init --recursive
+
+	echo "start building ..."
+	./install.py --clang-completer --gocode-completer
+
+	cd $old_dir
+}
+
+# install MacVim 
+install_mac_vim
+
+# install CMake
+install_cmake
+
+# clone Vundle
+clone_github_project Vundle.vim
+
+# clone and build ycm first
+clone_github_project YouCompleteMe
+build_ycm
+
+# let vundle do rest of the jobs
+vim +PluginInstall
+
