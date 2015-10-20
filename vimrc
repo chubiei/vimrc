@@ -28,3 +28,12 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
+" encodings
+set fileencodings=utf-8
+set encoding=utf-8
+
+" syntax & highlight
+syntax on
+set ruler
+set hlsearch
+
