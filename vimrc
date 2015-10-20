@@ -17,9 +17,7 @@ Plugin 'chubiei/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
-" remove ycm tab binding, so it would be compatible with ultisnips
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+Plugin 'steffanc/cscopemaps.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -27,6 +25,11 @@ filetype plugin indent on    " required
 
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+
+" remove ycm tab binding, so it would be compatible with ultisnips
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_collect_identifiers_from_tags_files = 1
 
 " encodings
 set fileencodings=utf-8
