@@ -1,0 +1,56 @@
+#!/bin/sh
+
+BUNDLE_DIR=bundle
+GIT=git
+
+clone_github_project()
+{
+	local project=$1
+	local dest="$BUNDLE_DIR/$project"
+
+	if [ -d $dest ]; then
+		echo "$dest exists, skipping ..."
+		return
+	fi
+
+	mkdir -p $BUNDLE_DIR
+	$GIT clone https://github.com/chubiei/$project $dest
+}
+
+build_ycm()
+{
+	local old_dir=`pwd`
+	local ycm_dir="$BUNDLE_DIR/YouCompleteMe"
+
+	if [ ! -d $ycm_dir ]; then
+		echo "YouCompleteMe does not exist, abort"
+		exit -1
+	fi
+
+
+	echo "building YouCompleteMe ..."
+	cd $ycm_dir
+
+	echo "installing essential packages ..."
+	sudo apt-get install build-essential cmake python-dev
+
+	echo "initializing ycm components ..."
+	$GIT submodule update --init --recursive
+
+	echo "start building ..."
+	./install.py --clang-completer --gocode-completer
+
+	cd $old_dir
+}
+
+
+# clone Vundle
+clone_github_project Vundle.vim
+
+# clone and build ycm first
+clone_github_project YouCompleteMe
+build_ycm
+
+# let vundle do rest of the jobs
+vim +PluginInstall
+
