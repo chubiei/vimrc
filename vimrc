@@ -40,3 +40,9 @@ syntax on
 set ruler
 set hlsearch
 
+" tags - search parent folders
+set tags=./tags;
+
+" title - show file name on title
+set title
+
