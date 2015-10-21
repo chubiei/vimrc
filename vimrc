@@ -19,6 +19,8 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'steffanc/cscopemaps.vim'
 
+Plugin 'majutsushi/tagbar'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -50,4 +52,11 @@ set title
 " - enable 256 colors and utf-8 anyway
 set t_Co=256
 set termencoding=utf-8
+
+" hotkey for tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" lighlight cursorline
+set cursorline
+
 
