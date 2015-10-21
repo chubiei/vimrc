@@ -46,3 +46,8 @@ set tags=./tags;
 " title - show file name on title
 set title
 
+" terminal settings
+" - enable 256 colors and utf-8 anyway
+set t_Co=256
+set termencoding=utf-8
+
