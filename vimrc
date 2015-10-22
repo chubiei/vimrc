@@ -17,7 +17,7 @@ Plugin 'chubiei/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
-Plugin 'steffanc/cscopemaps.vim'
+Plugin 'chubiei/cscopemaps.vim'
 
 Plugin 'majutsushi/tagbar'
 
