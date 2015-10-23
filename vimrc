@@ -2,10 +2,15 @@ set nocompatible    " required for vundle
 filetype  off       " required for vundle
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
+if has('win32')
+	set rtp+=~/vimfiles/bundle/Vundle.vim/
+	call vundle#begin('~/vimfiles/bundle/')
+else
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+endif
+
 
 " let Vundle manage Vundle, required
 Plugin 'chubiei/Vundle.vim'
@@ -59,4 +64,12 @@ nmap <F8> :TagbarToggle<CR>
 " lighlight cursorline
 set cursorline
 
+" make backspace work like most other apps
+set backspace=2
+
+" customized commands for windows
+if has('win32')
+	let g:ycm_path_to_python_interpreter = 'C:\Python27\python.exe'
+	let g:vundle#git_cmd = '"C:\Program Files\Git\bin\git.exe"'
+endif
 
