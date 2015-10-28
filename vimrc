@@ -22,6 +22,8 @@ Plugin 'chubiei/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+Plugin 'chubiei/synology-dev.vim'
+
 Plugin 'chubiei/cscopemaps.vim'
 
 Plugin 'majutsushi/tagbar'
@@ -48,7 +50,7 @@ set ruler
 set hlsearch
 
 " tags - search parent folders
-set tags=./tags;
+set tags+=./tags;
 
 " title - show file name on title
 set title
