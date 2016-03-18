@@ -40,6 +40,11 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 "let g:ycm_collect_identifiers_from_tags_files = 1
 
+" fine tune ycm behavior
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
 " encodings
 set fileencodings=utf-8
 set encoding=utf-8
