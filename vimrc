@@ -69,6 +69,9 @@ set cursorline
 " make backspace work like most other apps
 set backspace=2
 
+" enable modeline
+set modeline
+
 " customized commands for windows
 if has('win32')
 	let g:ycm_path_to_python_interpreter = 'C:\Python27\python.exe'
